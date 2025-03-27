@@ -2,6 +2,8 @@ from django.shortcuts import render
 from .models import *
 from django.http import JsonResponse
 import json
+import datetime
+from.models import *
 
 def store(request):
     if request.user.is_authenticated:
@@ -44,7 +46,7 @@ def checkout(request):
     else:
         # Create empty cart for non-logged in users
         items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
 
     context = {'items': items, 'order': order, 'cartItems': cartItems}
@@ -81,3 +83,30 @@ def updateItem(request):
     except Exception as e:
         print('Erro:', e)
         return JsonResponse({'error': str(e)}, status=500)
+
+def processOrder(request):
+    transaction_id = datetime.datetime.now().timestamp()
+    data = json.loads(request.body)
+
+    if request.user.is_authenticated:
+        costumer = request.user.costumer
+        order, created = Order.objects.get_or_create(costumer=costumer, complete=False)
+        total = float(data['form']['total'])
+        order.transaction_id = transaction_id
+
+        if total == order.get_cart_total:
+            order.complete = True
+        order.save()
+
+        if order.shipping == True:
+            ShippingAddress.objects.create(
+                customer = customer,
+                order = order,
+                address = data['shipping']['city'],
+                city = data['shipping']['state'],
+                zipecode = data['shipping']['zipecode'],
+            )
+
+    else:
+        print('User is not logged in..')
+    return JsonResponse('Payment submitted..', safe=False)
