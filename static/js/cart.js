@@ -8,7 +8,7 @@ for ( i = 0; i < updateBtns.length; i++) {
 
         console.log('USER:', user)
         if (user == 'AnonymousUser'){
-            console.log('Usuario não autenticado')
+            addCookieItem(productId, action)
         }else{
             updateUserOrder(productId, action)
         }
@@ -71,5 +71,31 @@ function updateUserOrder(productId, action){
             console.error('Erro ao atualizar:', error);
             alert('Erro ao atualizar o carrinho. Tente novamente.');
         });
+}
+
+function addCookieItem(productId, action) {
+    console.log('Usuario não autenticado')
+
+    if (action == 'add') {
+        if (cart[productId] == undefined) {
+        cart[productId] = {'quantity': 1}
+
+        }else {
+            cart[productId]['quantity'] += 1
+        }
+    }
+
+    if (action == 'remove') {
+        cart[productId]['quatity'] -= 1
+
+        if (cart[productId]['quatity'] <= 0) {
+            console.log('Item deve ser deletado')
+            delete cart[productId];
+        }
+    }
+    console.log('CART:', cart)
+    document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+
+    location.reload()
 }
     

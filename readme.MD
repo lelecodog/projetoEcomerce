@@ -1,1 +1,1 @@
-i stoped in the step 1 | Shipping Addres | 3 Site Functionality
+i stoped in the part 1 | setep 2 adding/removing items | Guest Checkout
