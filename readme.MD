@@ -1,1 +1,1 @@
-i stoped in the part 1 | setep 2 adding/removing items | Guest Checkout
+i stoped in the part 5 cookieCart function() | setep 1  | Guest Checkout

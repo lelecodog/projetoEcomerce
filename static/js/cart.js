@@ -86,9 +86,9 @@ function addCookieItem(productId, action) {
     }
 
     if (action == 'remove') {
-        cart[productId]['quatity'] -= 1
+        cart[productId]['quantity'] -= 1
 
-        if (cart[productId]['quatity'] <= 0) {
+        if (cart[productId]['quantity'] <= 0) {
             console.log('Item deve ser deletado')
             delete cart[productId];
         }
