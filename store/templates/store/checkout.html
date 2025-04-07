@@ -19,7 +19,7 @@
                               <p>Shipping Information</p>
                               <hr>
                               <div class="form-field">
-                                   <input required class="form-control" type="text" name="adress" placeholder="Adress..">
+                                   <input required class="form-control" type="text" name="address" placeholder="Address..">
                               </div> 
                               <div class="form-field">
                                    <input required class="form-control" type="text" name="city" placeholder="City..">
@@ -111,7 +111,7 @@
                }
 
                var shippingInfo = {
-                    'adress':null,
+                    'address':null,
                     'city':null,
                     'state':null,
                     'zipcode':null,
@@ -119,7 +119,7 @@
                }
 
                if (shipping != 'False'){
-                    shippingInfo.adress = form.adress.value
+                    shippingInfo.address = form.address.value
                     shippingInfo.city = form.city.value
                     shippingInfo.state = form.state.value
                     shippingInfo.zipcode = form.zipcode.value
@@ -147,6 +147,10 @@
           .then((data) => {
                console.log('Success:', data);
                alert('Transaction Completed');
+
+               cart = {}
+               document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+
                window.location.href = "{% url 'store' %}"
                })
           }

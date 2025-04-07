@@ -1,1 +1,1 @@
-i stoped in the part 6 checkout | setep 1  | Guest Checkout part 4
+i stoped in the part 5 Payment Integration
