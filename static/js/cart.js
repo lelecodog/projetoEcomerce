@@ -35,38 +35,12 @@ function updateUserOrder(productId, action){
             return response.json();
         })
         .then((data) => {
-            console.log('Dados recebidos:', data);
-    
-            // Atualizar a quantidade para o item específico
-            const quantityElement = document.querySelector(
-                `.chg-quantity[data-product="${productId}"]`
-            ).closest('.cart-row').querySelector('.quantity');
-            
-            if (quantityElement) {
-                quantityElement.textContent = data.productQuantity; // Atualiza a quantidade do produto
-            }
-    
-            // Atualizar o total do produto específico
-            const productTotalElement = document.querySelector(
-                `.product-total[data-product="${productId}"]`
-            );
-            if (productTotalElement) {
-                productTotalElement.textContent = `$${data.productTotal.toFixed(2)}`;
-            }
-
-            // Atualizar o total do carrinho
-            const cartTotalElement = document.querySelector('.cart-total');
-            if (cartTotalElement) {
-                cartTotalElement.textContent = `$${data.cartTotal.toFixed(2)}`;
-            }
-
-            // Atualizar o número total de itens no carrinho
-            const cartItemsElement = document.querySelector('.cart-items');
-            if (cartItemsElement) {
-                cartItemsElement.textContent = `${data.cartItems}`;
-            }
-            
+            console.log('Dados recebidos:', data)
+            // Recarregar a página após a atualização
+            location.reload();
+           
         })
+        // Adicione um bloco catch para lidar com erros
         .catch((error) => {
             console.error('Erro ao atualizar:', error);
             alert('Erro ao atualizar o carrinho. Tente novamente.');

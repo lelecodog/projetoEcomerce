@@ -87,6 +87,10 @@ def processOrder(request):
         order.complete = True
     order.save()
 
+     # Limpar o carrinho após o pedido ser concluído
+    if request.user.is_authenticated:
+        order.orderitem_set.all().delete()  # Deleta todos os itens do carrinho
+
     if order.shipping == True:
         ShippingAddress.objects.create(
             customer = customer,
