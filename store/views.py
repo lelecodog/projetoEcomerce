@@ -1,10 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 from .models import *
 from django.http import JsonResponse
 import json
 import datetime
 from.models import *
 from .utils import cookieCart, cartData, guestOrder
+from .forms import CustomUserCreationForm
+
 
 def store(request):
     data = cartData(request)
@@ -12,6 +17,16 @@ def store(request):
     cartItems = data['cartItems']
     order = data['order']
     items = data['items']
+
+    if request.user.is_authenticated:
+        Customer.objects.get_or_create(
+            user=request.user, 
+            defaults={
+                'name': request.user.username, 
+                'email': request.user.email
+            }
+        )
+
 
     products = Product.objects.all()
     context = {'products': products, 'cartItems': cartItems}
@@ -102,3 +117,44 @@ def processOrder(request):
         )
         
     return JsonResponse('Payment submitted..', safe=False)
+
+def loginPage(request):
+    if request.user.is_authenticated:
+        return redirect('store')
+    else:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('store')
+            else:
+                messages.error(request, 'Username or password is incorrect')
+
+        return render(request, 'store/login.html')
+
+def registerPage(request):
+    if request.user.is_authenticated:
+        return redirect('store')
+    else:
+        form = CustomUserCreationForm()
+        if request.method == 'POST':
+            form = CustomUserCreationForm(request.POST)
+            if form.is_valid():
+                user = form.save()
+                # Criar o objeto Customer associado ao usuário
+                Customer.objects.create(
+                    user=user,
+                    name=form.cleaned_data.get('name'),
+                    email=form.cleaned_data.get('email')
+                )
+                messages.success(request, 'Account created successfully')
+                return redirect('login')
+
+        context = {'form': form}
+        return render(request, 'store/register.html', context)
+
+def logoutUser(request):
+    logout(request)
+    return redirect('login')
