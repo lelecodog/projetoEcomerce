@@ -91,31 +91,36 @@ def processOrder(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
-
     else:
         customer, order = guestOrder(request, data)
 
+    # Substituir vírgula por ponto no total enviado
     total = float(data['form']['total'].replace(',', '.'))
     order.transaction_id = transaction_id
 
-    if total == order.get_cart_total:
+    # Logs para depuração
+    print(f"Total enviado pelo cliente: {total}")
+    print(f"Total calculado no servidor: {order.get_cart_total}")
+
+    # Verificar se os totais correspondem
+    if abs(round(total, 2) == round(order.get_cart_total, 2))< 0.01:
         order.complete = True
-    order.save()
+        order.save()
+        print(f"Pedido {order.id} marcado como completo.")
+    else:
+        print('Erro: os totais não correspondem.')
+        return JsonResponse({'error': 'Total não corresponde ao valor calculado'}, status=400)
 
-     # Limpar o carrinho após o pedido ser concluído
-    if request.user.is_authenticated:
-        order.orderitem_set.all().delete()  # Deleta todos os itens do carrinho
-
-    if order.shipping == True:
+    if order.shipping:
         ShippingAddress.objects.create(
-            customer = customer,
-            order = order,
-            address = data['shipping']['address'],
-            city = data['shipping']['city'],
-            state = data['shipping']['state'],
-            zipcode = data['shipping']['zipcode'],
+            customer=customer,
+            order=order,
+            address=data['shipping']['address'],
+            city=data['shipping']['city'],
+            state=data['shipping']['state'],
+            zipcode=data['shipping']['zipcode'],
         )
-        
+
     return JsonResponse('Payment submitted..', safe=False)
 
 def loginPage(request):

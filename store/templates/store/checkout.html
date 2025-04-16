@@ -3,7 +3,7 @@
 {% block content %}
      <div class="row">
           <div class="col-lg-6">
-              <div class="box-element" id="form-wraper">
+              <div class="box-element" id="form-wrapper">
                     <form id="form">
                          <div id="user-info">
                               <div class="form-field">
@@ -71,12 +71,14 @@
 
      <script type="text/javascript">
           var shipping = '{{order.shipping}}'
-          var total = '{{order.get_cart_total|floatformat:2}}'
+          var total = '{{order.get_cart_total|floatformat:2}}';
+          total = parseFloat(total.replace(',', '.'));
           
+          // ocultar informações de envio se o pedido não exigir envio
           if (shipping == 'False'){
                document.getElementById('shipping-info').innerHTML = ''
           }
-
+          // ocultar informações do usuário se o cliente estiver logado
           if (user != 'AnonymousUser'){
                document.getElementById('user-info').innerHTML = ''
           }
@@ -107,7 +109,7 @@
                var userFormData = {
                     'name':null,
                     'email':null,
-                    'total':total,
+                    'total':total.toFixed(2),
                }
 
                var shippingInfo = {
