@@ -10,7 +10,7 @@
                     <h6><strong>{{product.name}}</strong></h6>
                     <hr>
                     <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to cart</button>
-                    <a class="btn btn-outline-success bg-dark" href="#">View</a>
+                    <a class="btn btn-outline-success bg-dark" href="{% url 'product_detail' product.id %}">View</a>
                     <h4 style="display: inline-block; float: right;"><strong>${{product.price|floatformat:2}}</strong></h4>
                </div>
           </div>
@@ -19,3 +19,15 @@
      
 {% endblock content %}
 
+{% block footer %}
+
+     <footer class="bg-dark text-white text-center py-2 mt-4 container-fluid">
+          <p>&copy; 2025 E-Commerce. All rights reserved.</p>
+          <p>
+          <a href="#" class="text-white mx-2">Privacy Policy</a> |
+          <a href="#" class="text-white mx-2">Terms of Service</a> |
+          <a href="#" class="text-white mx-2">Contact Us</a>
+          </p>
+     </footer>
+        
+{% endblock footer %}

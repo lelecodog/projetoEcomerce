@@ -163,3 +163,12 @@ def registerPage(request):
 def logoutUser(request):
     logout(request)
     return redirect('login')
+
+def productDetail(request, pk):
+    data = cartData(request)
+    cartItems = data['cartItems']
+
+    product = Product.objects.get(id=pk)
+    context = {'product': product, 'cartItems': cartItems}
+    return render(request, 'store/product_detail.html', context)
+    

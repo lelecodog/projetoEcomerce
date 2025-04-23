@@ -1,0 +1,18 @@
+{% extends 'store/main.html' %}
+{% block content %}
+<div class="d-flex flex-column align-items-center">
+    <h2 class="text-center mb-4">{{ product.name }}</h2>
+    <div class="col-lg-6 mb-4">
+        <img class="thumbnail img-fluid" src="{{ product.imageURL }}" alt="product image">
+    </div>
+    <div class="col-lg-6 text-center">
+        <h4 class="mb-4"><strong>${{ product.price|floatformat:2 }}</strong></h4>
+        <p class="mb-4"><strong>Description:</strong> {{ product.description }}</p>
+        <div class="d-flex justify-content-center"> <!-- Alinha os botões horizontalmente -->
+            <button data-product="{{ product.id }}" data-action="add" class="btn btn-outline-secondary update-cart" style="margin-right: 15px;">Add to cart</button>
+            <a href="{% url 'store' %}" class="btn btn-outline-dark">Back to Store</a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
