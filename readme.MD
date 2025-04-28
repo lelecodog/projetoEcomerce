@@ -22,16 +22,16 @@ Este projeto foi criado para simular um sistema de e-commerce simples mas funcio
 - Integração com métodos de pagamento (em desenvolvimento).
 
 ### Tela Principal
-![Tela Principal](static/imgProject/home.png)
+![Tela Principal](static/imgProject/telaPrincipal.PNG)
 
 ### Carrinho
-![Carrinho](static/imgproject/cart.png)
+![Carrinho](static/imgProject/Cart.PNG)
 
 ### Checkout
-![Checkout](static/imgProject/checkout.png)
+![Checkout](static/imgProject/Checkout.PNG)
 
 ### Tela de Login
-![Tela de Login](static/imgProject/login.png)
+![Tela de Login](static/imgProject/login.PNG)
 
 
 ## Instalação
