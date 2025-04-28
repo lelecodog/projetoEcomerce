@@ -52,8 +52,7 @@ Siga os passos abaixo para configurar o projeto localmente:
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/ecommerce-django.git
-   cd ecommerce-djangoCollecting workspace informationCriar uma documentação para o seu projeto é uma ótima ideia para facilitar a manutenção e o entendimento do sistema. Aqui está um guia para criar uma documentação básica e bem estruturada para o seu projeto Django.
+   git clone https://github.com/lelecodog/projetoEcomerce
 
 2. Crie e ative um ambiente virtual:
    ```bash
