@@ -19,19 +19,24 @@ Este projeto foi criado para simular um sistema de e-commerce simples mas funcio
 - Cadastro e login de usuários.
 - Adição e remoção de itens no carrinho.
 - Processamento de pedidos.
+- Gerenciamento de Cokkies para usuários não autenticados. 
 - Integração com métodos de pagamento (em desenvolvimento).
 
 ### Tela Principal
 ![Tela Principal](static/imgProject/telaPrincipal.PNG)
+- Aqui você vizualiza todos os produtos da loja podendo adicionar produtos ao carrinho de compras e navegar para detalhes de cada produto.
 
 ### Carrinho
 ![Carrinho](static/imgProject/Cart.PNG)
+- Aqui você vizualiza todos os produtos adicionados ao carrinho podendo aumentar ou diminuir a quantidade e remover itens.
 
 ### Checkout
 ![Checkout](static/imgProject/Checkout.PNG)
+- Aqui você poderá finalizar a sua compra adicionando seus dados de entrega se nescessario. Lembrando que o site utiliza Cokkies para lidar com usuários não autenticados, nesse caso é aqui que usuario poderá criar seu custumer user para finalizar o pedido.
 
 ### Tela de Login
 ![Tela de Login](static/imgProject/login.PNG)
+- Tela básica de login para logar com usuário já cadastrado ou navegar para tela de registro.
 
 
 ## Instalação
