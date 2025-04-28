@@ -23,9 +23,8 @@ Este projeto foi criado para simular um sistema de e-commerce simples mas funcio
 - Integração com métodos de pagamento (em desenvolvimento).
 
 ### Tela Principal
-![Tela Principal](static/imgProject/telaPrincipal.PNG)
 - Aqui você vizualiza todos os produtos da loja podendo adicionar produtos ao carrinho de compras e navegar para detalhes de cada produto.
-
+![Tela Principal](static/imgProject/telaPrincipal.PNG)
 
 
 ### Carrinho
@@ -33,11 +32,9 @@ Este projeto foi criado para simular um sistema de e-commerce simples mas funcio
 - Aqui você vizualiza todos os produtos adicionados ao carrinho podendo aumentar ou diminuir a quantidade e remover itens.
 
 
-
 ### Checkout
 ![Checkout](static/imgProject/Checkout.PNG)
 - Aqui você poderá finalizar a sua compra adicionando seus dados de entrega se nescessario. Lembrando que o site utiliza Cokkies para lidar com usuários não autenticados, nesse caso é aqui que usuario poderá criar seu custumer user para finalizar o pedido.
-
 
 
 ### Tela de Login
